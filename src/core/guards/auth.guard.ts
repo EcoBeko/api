@@ -9,7 +9,11 @@ export class AuthGuard implements CanActivate {
     const token = request.headers["authorization"]?.split(" ")[1] || "";
 
     try {
-      const { user } = jwt.verify(token, "super_secret") as any;
+      const user = jwt.verify(token, "super_secret", {
+        algorithms: ["HS256"],
+      }) as any;
+      delete user["iat"];
+      delete user["password"];
 
       request.user = user;
       return true;

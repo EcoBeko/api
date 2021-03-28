@@ -13,9 +13,9 @@ export class PGPoolService {
   connectionConfig: ConnectionConfig = {
     port: 5432,
     connectionTimeoutMillis: 5000,
-    user: "postgres",
     host: "eco-beko.ryspekov.life",
-    database: "postgres",
+    database: "ecobeko",
+    user: "postgres",
     password: "super_secret",
   };
 

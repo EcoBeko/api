@@ -40,7 +40,9 @@ export class UsersService {
         ...user,
         password: undefined,
       },
-      token: jwt.sign(user, "super_secret"),
+      token: jwt.sign(user, "super_secret", {
+        algorithm: "HS256",
+      }),
     };
   }
 }

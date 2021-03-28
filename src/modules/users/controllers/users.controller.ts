@@ -26,10 +26,7 @@ export class UsersController {
   })
   @ApiResponse({ status: 200, description: "Ok" })
   public async info(@GetUser() user: IUser) {
-    return {
-      ...user,
-      password: undefined,
-    };
+    return user;
   }
 
   @HttpCode(HttpStatus.OK)
