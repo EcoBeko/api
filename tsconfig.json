@@ -1,15 +1,33 @@
 {
   "compilerOptions": {
+    // build settings
     "module": "commonjs",
     "declaration": true,
-    "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2017",
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "incremental": true,
+    "removeComments": true,
     "outDir": "./dist",
+    "target": "ES2017",
+    "lib": ["ES2015", "ScriptHost", "DOM"],
+    "esModuleInterop": true,
+    "charset": "utf8",
+
+    // checking rules
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+
+    // path resolving
     "baseUrl": "./",
-    "incremental": true
-  },
-  "exclude": ["node_modules", "dist"]
+    "paths": {
+      "@/*": ["./src/*"],
+    }
+  }
 }
