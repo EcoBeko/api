@@ -34,4 +34,9 @@ export class PGPoolService {
     pg.types.setTypeParser(701, "text", parseFloat);
     pg.types.setTypeParser(1700, "text", parseFloat);
   }
+
+  public async query(query: string, params?: any[]): Promise<any[]> {
+    const result = await this.pool.query(query, params);
+    return result.rows;
+  }
 }

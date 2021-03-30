@@ -1,4 +1,4 @@
-import { IUser, UserRole } from "@/@types";
+import { IUser, UserGender, UserRole } from "@/@types";
 import { GetUser } from "@/core/decorators/get-user.decorator";
 import { Protected } from "@/core/decorators/protected.decorator";
 import {
@@ -43,5 +43,29 @@ export class UsersController {
     @Body("role") role: UserRole,
   ) {
     return this.service.authenticate(username, password, role);
+  }
+
+  @Post("/")
+  @ApiOperation({
+    summary: "Создание пользователя",
+  })
+  @ApiResponse({ status: 201, description: "Created" })
+  @ApiResponse({ status: 400, description: "User exists" })
+  public async create(
+    @Body("first_name") first_name: string,
+    @Body("last_name") last_name: string,
+    @Body("username") username: string,
+    @Body("password") password: string,
+    @Body("gender") gender: UserGender,
+    @Body("role") role: UserRole,
+  ) {
+    return this.service.createUser(
+      first_name,
+      last_name,
+      username,
+      password,
+      gender,
+      role,
+    );
   }
 }
