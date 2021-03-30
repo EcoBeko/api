@@ -33,7 +33,7 @@ export class UsersService {
   }
 
   public async getUserById(id: string): Promise<IUser> {
-    const [user] = await this.db.query("select * from users where id = $1", [
+    const [user] = await this.db.query("select * from f_get_user_by_id($1)", [
       id,
     ]);
 
@@ -44,14 +44,12 @@ export class UsersService {
     username: string,
     role: UserRole,
   ): Promise<IUser> {
-    const [user] = (await this.db.query(
-      `
-      select * from users
-      where username = $1
-      and role = $2      
-    `,
-      [username, role],
-    )) as IUser[];
+    const [
+      user,
+    ] = (await this.db.query("select * from f_get_user_by_username($1, $2)", [
+      username,
+      role,
+    ])) as IUser[];
 
     return user;
   }
@@ -93,11 +91,13 @@ export class UsersService {
     const isExists = await this.isUserExists(username, role);
     if (isExists) throw new BadRequestException("Username exists");
 
+    const hashedPassword = await bcrypt.hash(password, await bcrypt.genSalt());
+
     const [
       result,
     ] = await this.db.query(
       "call public.p_create_user($1,$2,$3,$4,$5,$6,$7);",
-      [first_name, last_name, username, password, gender, null, role],
+      [first_name, last_name, username, hashedPassword, gender, null, role],
     );
 
     const user = await this.getUserById(result._id);
