@@ -8,7 +8,9 @@ import {
   HttpCode,
   HttpStatus,
   Inject,
+  Param,
   Post,
+  Put,
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { UsersService } from "../services/users.service";
@@ -32,7 +34,7 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   @Post("authenticate")
   @ApiOperation({
-    summary: "Авторизация пользователя",
+    summary: "Authorize user",
   })
   @ApiResponse({ status: 200, description: "Ok" })
   @ApiResponse({ status: 400, description: "Passwords do not match" })
@@ -47,7 +49,7 @@ export class UsersController {
 
   @Post("/")
   @ApiOperation({
-    summary: "Создание пользователя",
+    summary: "Create user",
   })
   @ApiResponse({ status: 201, description: "Created" })
   @ApiResponse({ status: 400, description: "User exists" })
@@ -63,6 +65,30 @@ export class UsersController {
       first_name,
       last_name,
       username,
+      password,
+      gender,
+      role,
+    );
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Put("/:id")
+  @ApiOperation({
+    summary: "Update user",
+  })
+  @ApiResponse({ status: 200, description: "Updated" })
+  public async update(
+    @Body("first_name") first_name: string,
+    @Body("last_name") last_name: string,
+    @Body("password") password: string,
+    @Body("gender") gender: UserGender,
+    @Body("role") role: UserRole,
+    @Param("id") id: string,
+  ) {
+    return this.service.updateUser(
+      id,
+      first_name,
+      last_name,
       password,
       gender,
       role,

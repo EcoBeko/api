@@ -27,6 +27,7 @@ export class UsersService {
     if (!equals) throw new BadRequestException("Passwords do not match");
 
     return {
+      successful: true,
       user: this.getPasswordlessUser(user),
       token: this.generateAccessToken(user),
     };
@@ -84,7 +85,6 @@ export class UsersService {
     last_name: string,
     username: string,
     password: string,
-
     gender: UserGender,
     role: UserRole,
   ) {
@@ -103,8 +103,35 @@ export class UsersService {
     const user = await this.getUserById(result._id);
 
     return {
+      successful: true,
       user: this.getPasswordlessUser(user),
       token: this.generateAccessToken(user),
+    };
+  }
+
+  public async updateUser(
+    id: string,
+    first_name: string,
+    last_name: string,
+    password: string,
+    gender: UserGender,
+    role: UserRole,
+  ) {
+    if (password) {
+      password = await bcrypt.hash(password, await bcrypt.genSalt());
+    }
+
+    await this.db.query("call public.p_update_user($1,$2,$3,$4,$5,$6);", [
+      id,
+      first_name,
+      last_name,
+      password || null,
+      gender,
+      role,
+    ]);
+
+    return {
+      successful: true,
     };
   }
 }
