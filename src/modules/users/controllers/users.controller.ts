@@ -28,7 +28,7 @@ export class UsersController {
   })
   @ApiResponse({ status: 200, description: "Ok" })
   public async info(@GetUser() user: IUser) {
-    return user;
+    return this.service.getPasswordlessUser(this.service.getUserById(user.id));
   }
 
   @HttpCode(HttpStatus.OK)
@@ -71,6 +71,7 @@ export class UsersController {
     );
   }
 
+  @Protected()
   @HttpCode(HttpStatus.OK)
   @Put("/:id")
   @ApiOperation({
@@ -78,12 +79,13 @@ export class UsersController {
   })
   @ApiResponse({ status: 200, description: "Updated" })
   public async update(
+    @Param("id") id: string,
     @Body("first_name") first_name: string,
     @Body("last_name") last_name: string,
     @Body("password") password: string,
     @Body("gender") gender: UserGender,
     @Body("role") role: UserRole,
-    @Param("id") id: string,
+    @Body("avatar") avatar: string,
   ) {
     return this.service.updateUser(
       id,
@@ -92,6 +94,7 @@ export class UsersController {
       password,
       gender,
       role,
+      avatar,
     );
   }
 }

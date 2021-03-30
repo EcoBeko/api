@@ -1,6 +1,5 @@
 import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
 import jwt from "jsonwebtoken";
-
 @Injectable()
 export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -12,8 +11,6 @@ export class AuthGuard implements CanActivate {
       const user = jwt.verify(token, "super_secret", {
         algorithms: ["HS256"],
       }) as any;
-      delete user["iat"];
-      delete user["password"];
 
       request.user = user;
       return true;

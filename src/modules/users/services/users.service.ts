@@ -116,18 +116,20 @@ export class UsersService {
     password: string,
     gender: UserGender,
     role: UserRole,
+    avatar: string,
   ) {
     if (password) {
       password = await bcrypt.hash(password, await bcrypt.genSalt());
     }
 
-    await this.db.query("call public.p_update_user($1,$2,$3,$4,$5,$6);", [
+    await this.db.query("call public.p_update_user($1,$2,$3,$4,$5,$6,$7);", [
       id,
       first_name,
       last_name,
       password || null,
       gender,
       role,
+      avatar,
     ]);
 
     return {

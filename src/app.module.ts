@@ -1,9 +1,21 @@
 import { Module } from "@nestjs/common";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
 import { PoolModule } from "./core/pool/pool.module";
+import { ImagesModule } from "./modules/images/images.module";
 import { UsersModule } from "./modules/users/users.module";
 
 @Module({
-  imports: [PoolModule, UsersModule],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "..", "public"),
+      serveRoot: "/static",
+      exclude: ["/api*"],
+    }),
+    PoolModule,
+    ImagesModule,
+    UsersModule,
+  ],
   controllers: [],
   providers: [],
 })
