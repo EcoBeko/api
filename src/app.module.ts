@@ -3,6 +3,7 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
 import { PoolModule } from "./core/pool/pool.module";
 import { ImagesModule } from "./modules/images/images.module";
+import { StatsModule } from "./modules/stats/stats.module";
 import { UsersModule } from "./modules/users/users.module";
 
 @Module({
@@ -15,6 +16,7 @@ import { UsersModule } from "./modules/users/users.module";
     PoolModule,
     ImagesModule,
     UsersModule,
+    StatsModule,
   ],
   controllers: [],
   providers: [],

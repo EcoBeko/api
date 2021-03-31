@@ -22,7 +22,6 @@ export class ImagesController {
   @Inject(ImagesService)
   private readonly service: ImagesService;
 
-  @Protected()
   @Post("/")
   @ApiOperation({
     summary: "Create or rewrite new image",
