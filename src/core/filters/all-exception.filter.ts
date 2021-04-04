@@ -16,7 +16,7 @@ export class AllExceptionFilter extends GenericExceptionFilter
     const message = exception.message;
     const statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
-    Logger.error(message, exception.stack);
+    Logger.error(`[AllExceptionFilter] ${message}`, exception.stack);
     this.sendError(statusCode, message);
   }
 }

@@ -17,7 +17,7 @@ export class HttpExceptionFilter extends GenericExceptionFilter
     const statusCode = exception.getStatus();
 
     if (statusCode >= 500) {
-      Logger.error(message);
+      Logger.error(`[HttpExceptionFilter] ${message}`);
     }
 
     this.sendError(statusCode, message);

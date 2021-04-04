@@ -17,4 +17,20 @@ export class StatsService {
   public async getGlobalStats() {
     return this.db.query("select * from f_get_global_stats()");
   }
+
+  public async getWasteTypes() {
+    return this.db.query("select * from f_get_waste_types()");
+  }
+
+  public async addStatsRecord(
+    userId: string,
+    wasteTypeId: string,
+    amount: number,
+  ) {
+    return this.db.query("call p_add_stats_record($1,$2,$3)", [
+      userId,
+      wasteTypeId,
+      amount,
+    ]);
+  }
 }

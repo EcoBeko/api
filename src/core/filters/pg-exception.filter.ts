@@ -22,7 +22,7 @@ export class PGExceptionFilter extends GenericExceptionFilter
     }
     const statusCode = HttpStatus.BAD_REQUEST;
 
-    Logger.error(message);
+    Logger.error(`[PGExceptionFilter] ${message}`);
     this.sendError(statusCode, message);
   }
 }

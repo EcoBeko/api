@@ -1,5 +1,5 @@
 import { Protected } from "@/core/decorators/protected.decorator";
-import { Controller, Get, Inject, Param } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { StatsService } from "../services/stats.service";
 
@@ -19,6 +19,15 @@ export class StatsController {
     return this.service.getTypes();
   }
 
+  @Get("/waste-types")
+  @ApiOperation({
+    summary: "Get waste types",
+  })
+  @ApiResponse({ status: 200, description: "Ok" })
+  public async getWasteTypes() {
+    return this.service.getWasteTypes();
+  }
+
   @Get("/:id")
   @ApiOperation({
     summary: "Get user stats",
@@ -26,6 +35,19 @@ export class StatsController {
   @ApiResponse({ status: 200, description: "Ok" })
   public async getUserStats(@Param("id") id: string) {
     return this.service.getUserStats(id);
+  }
+
+  @Post("/")
+  @ApiOperation({
+    summary: "Add stats record",
+  })
+  @ApiResponse({ status: 201, description: "Created" })
+  public async addStatsRecord(
+    @Body("userId") userId: string,
+    @Body("wasteTypeId") wasteTypeId: string,
+    @Body("amount") amount: number,
+  ) {
+    return this.service.addStatsRecord(userId, wasteTypeId, amount);
   }
 
   @Get("/")
