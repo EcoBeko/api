@@ -9,10 +9,10 @@ import { PGExceptionFilter } from "./core/filters/pg-exception.filter";
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger: ["error", "warn", "log"],
+    cors: true,
   });
   app.setGlobalPrefix("api");
   app.set("trust proxy", true);
-  app.enableCors();
 
   // filters in descending order
   app.useGlobalFilters(
