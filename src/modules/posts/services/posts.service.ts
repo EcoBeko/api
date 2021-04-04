@@ -25,6 +25,10 @@ export class PostsService {
   }
 
   public async getUserFeed(userId: string) {
-    return await this.db.query("select * from f_get_user_feed($1)", [userId]);
+    return this.db.query("select * from f_get_user_feed($1)", [userId]);
+  }
+
+  public async setLike(postId: string, userId: string) {
+    return this.db.query("call p_set_like($1,$2)", [postId, userId]);
   }
 }

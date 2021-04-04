@@ -1,6 +1,16 @@
 import { AuthorType, PostType } from "@/@types";
 import { Protected } from "@/core/decorators/protected.decorator";
-import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Param,
+  Post,
+  Put,
+} from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { PostsService } from "../services/posts.service";
 
@@ -39,5 +49,18 @@ export class PostsController {
   @ApiResponse({ status: 200, description: "Ok" })
   public async getUserFeed(@Param("user_id") userId: string) {
     return this.service.getUserFeed(userId);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Put("/:post_id/likes")
+  @ApiOperation({
+    summary: "Updates like status for user",
+  })
+  @ApiResponse({ status: 200, description: "Ok" })
+  public async updateLikes(
+    @Param("post_id") postId: string,
+    @Body("userId") userId: string,
+  ) {
+    return this.service.setLike(postId, userId);
   }
 }
