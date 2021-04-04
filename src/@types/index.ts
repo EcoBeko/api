@@ -14,6 +14,16 @@ export enum GenericStatus {
   DISABLED = "disabled",
 }
 
+export enum PostType {
+  ARTICLE = "article",
+  POST = "post",
+}
+
+export enum AuthorType {
+  USER = "user",
+  COMMUNITY = "community",
+}
+
 export interface IUser {
   id: string;
   first_name?: string;

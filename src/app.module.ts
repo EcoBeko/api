@@ -1,10 +1,11 @@
 import { Module } from "@nestjs/common";
 import { ServeStaticModule } from "@nestjs/serve-static";
-import { join } from "path";
 import { PoolModule } from "./core/pool/pool.module";
 import { ImagesModule } from "./modules/images/images.module";
+import { PostsModule } from "./modules/posts/posts.module";
 import { StatsModule } from "./modules/stats/stats.module";
 import { UsersModule } from "./modules/users/users.module";
+import { join } from "path";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UsersModule } from "./modules/users/users.module";
     ImagesModule,
     UsersModule,
     StatsModule,
+    PostsModule,
   ],
   controllers: [],
   providers: [],
