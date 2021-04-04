@@ -12,6 +12,7 @@ async function bootstrap() {
   });
   app.setGlobalPrefix("api");
   app.set("trust proxy", true);
+  app.enableCors();
 
   // filters in descending order
   app.useGlobalFilters(
