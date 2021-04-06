@@ -55,6 +55,18 @@ export class UserFriendsController {
     return this.service.updateStatus(userId, friendId, status);
   }
 
+  @Get("/:user_id/recommendations")
+  @ApiOperation({
+    summary: "Return list of user recommendations",
+  })
+  @ApiResponse({
+    status: 200,
+    description: "Ok",
+  })
+  public getUserRecommendations(@Param("user_id") userId: string) {
+    return this.service.getUserRecommendations(userId);
+  }
+
   @Get("/:user_id")
   @ApiOperation({
     summary: "Return list of friends by user id",

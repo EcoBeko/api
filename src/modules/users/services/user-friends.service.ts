@@ -28,4 +28,10 @@ export class UserFriendsService {
       status,
     ]);
   }
+
+  public async getUserRecommendations(userId: string) {
+    return this.db.query("select * from f_get_user_recommendations($1)", [
+      userId,
+    ]);
+  }
 }
