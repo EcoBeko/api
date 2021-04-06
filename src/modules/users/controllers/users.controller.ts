@@ -11,6 +11,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { UsersService } from "../services/users.service";
@@ -96,5 +97,19 @@ export class UsersController {
       role,
       avatar,
     );
+  }
+
+  @Protected()
+  @Get("/")
+  @ApiOperation({
+    summary: "Get users by filter",
+  })
+  @ApiResponse({ status: 200, description: "Ok" })
+  public getUsers(
+    @Query("firstName") firstName: string,
+    @Query("lastName") lastName: string,
+    @Query("gender") gender: string,
+  ) {
+    return this.service.getUsers(firstName, lastName, gender);
   }
 }

@@ -136,4 +136,11 @@ export class UsersService {
       successful: true,
     };
   }
+  public async getUsers(firstName: string, lastName: string, gender: string) {
+    return this.db.query("select * from f_search_users($1,$2,$3)", [
+      firstName,
+      lastName,
+      gender,
+    ]);
+  }
 }
