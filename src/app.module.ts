@@ -7,6 +7,7 @@ import { StatsModule } from "./modules/stats/stats.module";
 import { UsersModule } from "./modules/users/users.module";
 import { join } from "path";
 import { PointsModule } from "./modules/points/points.module";
+import { CommunitiesModule } from "./modules/communities/communities.module";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { PointsModule } from "./modules/points/points.module";
     StatsModule,
     PostsModule,
     PointsModule,
+    CommunitiesModule,
   ],
   controllers: [],
   providers: [],
