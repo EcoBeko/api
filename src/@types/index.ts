@@ -6,7 +6,7 @@ export enum UserGender {
 export enum UserRole {
   USER = "user",
   MODERATOR = "moderator",
-  admin = "admin",
+  ADMIN = "admin",
 }
 
 export enum GenericStatus {
