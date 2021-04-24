@@ -8,6 +8,7 @@ import { UsersModule } from "./modules/users/users.module";
 import { join } from "path";
 import { PointsModule } from "./modules/points/points.module";
 import { CommunitiesModule } from "./modules/communities/communities.module";
+import { EcoProjectsModule } from "./modules/eco-projects/eco-projects.module";
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CommunitiesModule } from "./modules/communities/communities.module";
     PostsModule,
     PointsModule,
     CommunitiesModule,
+    EcoProjectsModule,
   ],
   controllers: [],
   providers: [],
